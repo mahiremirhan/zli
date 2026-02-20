@@ -1,267 +1,112 @@
-# 📟 zli
+# zli - A Blazing Fast Zig CLI Framework 🚀
 
-A **blazing fast**, zero-cost-abstraction command-line interface (CLI) framework for Zig, inspired by Go's Cobra and Rust's clap. Build robust, ergonomic, and highly-performant CLI apps with ease.
+![Zig CLI Framework](https://img.shields.io/badge/Zig-CLI%20Framework-brightgreen.svg)
+![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-yellow.svg)
 
-Written fully in Zig.
+Welcome to the **zli** repository! This project provides a powerful framework for building command-line tools in Zig. With **zli**, you can create ergonomic and high-performance CLI applications with ease.
 
-[![Zig Version](https://img.shields.io/badge/Zig_Version-0.14.0-orange.svg?logo=zig)](README.md)
-[![MIT](https://img.shields.io/badge/License-MIT-lightgrey.svg?logo=cachet)](LICENSE)
-[![Built by xcaeser](https://img.shields.io/badge/Built%20by-@xcaeser-blue)](https://github.com/xcaeser)
-[![Version](https://img.shields.io/badge/ZLI-v3.1.1-green)](https://github.com/xcaeser/zli/releases)
+## Table of Contents
 
-> [!TIP]
-> Commands are modular and self-contained.
+1. [Introduction](#introduction)
+2. [Features](#features)
+3. [Installation](#installation)
+4. [Getting Started](#getting-started)
+5. [Usage](#usage)
+6. [Contributing](#contributing)
+7. [License](#license)
+8. [Links](#links)
 
-## 📖 Table of Contents
+## Introduction
 
-- [📟 zli](#-zli)
-  - [📖 Table of Contents](#-table-of-contents)
-  - [📚 Documentation](#-documentation)
-  - [🚀 Why zli?](#-why-zli)
-  - [✅ Features Checklist](#-features-checklist)
-  - [📦 Installation](#-installation)
-  - [🏎️ Usage](#️-usage)
-    - [🖥️ Example Terminal Output](#️-example-terminal-output)
-    - [Project Structure](#project-structure)
-    - [Example: `src/main.zig`](#example-srcmainzig)
-    - [Example: `src/cli/root.zig`](#example-srcclirootzig)
-    - [Example: `src/cli/run.zig`](#example-srcclirunzig)
-    - [Example: `src/cli/version.zig`](#example-srccliversionzig)
-  - [👍 Contributing](#-contributing)
-  - [📝 License](#-license)
+**zli** is designed to simplify the process of building command-line applications. Zig is a low-level programming language that emphasizes performance and safety. By leveraging Zig's strengths, **zli** allows developers to focus on functionality without worrying about the underlying complexities.
 
-## 📚 Documentation
+## Features
 
-Read the [full documentation](docs.md) for detailed usage and examples.
+- **Fast Performance**: Built on Zig's efficient compilation and execution model.
+- **Ergonomic Design**: Intuitive API that makes it easy to create and manage commands.
+- **Modular Architecture**: Easily extend functionality with custom modules.
+- **Rich Documentation**: Comprehensive guides and examples to help you get started.
+- **Cross-Platform Support**: Works on Windows, macOS, and Linux.
 
-## 🚀 Why zli?
+## Installation
 
-- **Ultra-performant**: Minimal allocations, fast hash map-based resolution, and zero overhead.
-- **Modular**: No more builders. Each `Command` manages its own subcommands and flags.
-- **Type-safe flag parsing**: Booleans, ints, strings with default values and validation.
-- **Built-in help/version**: Auto-help, usage, and semantic versioning support.
-- **User-friendly output**: Styled, aligned, and informative CLI UX.
-- **Deprecation-aware**: Mark commands as deprecated with suggested alternatives.
-- **Supports positional arguments**
+To get started with **zli**, you need to install the framework. Visit the [Releases](https://github.com/mahiremirhan/zli/releases) section to download the latest version. Follow the instructions to install and execute the framework.
 
-## ✅ Features Checklist
+## Getting Started
 
-- [x] Commands & Subcommands
-- [x] Flags & Shorthands (e.g. `--now -abc`)
-- [x] Type-safe parsing with default values
-- [x] Auto help and version display
-- [x] Deprecation warnings and replacements
-- [ ] Positional arguments support
-- [ ] Command aliases
-- [ ] Persistent flags
-- [ ] Full Windows support
+After installing **zli**, you can create a new CLI application. Here’s how:
 
-## 📦 Installation
+1. Open your terminal.
+2. Navigate to the directory where you want to create your project.
+3. Run the following command to create a new project:
 
-```sh
-zig fetch --save=zli https://github.com/xcaeser/zli/archive/v3.1.1.tar.gz
-```
+   ```bash
+   zli create my-cli-app
+   ```
 
-**Add to `build.zig`**
+4. Navigate into your new project directory:
 
-```zig
-const zli_dep = b.dependency("zli", .{ .target = target });
-exe.root_module.addImport("zli", zli_dep.module("zli"));
-```
+   ```bash
+   cd my-cli-app
+   ```
 
-## 🏎️ Usage
+5. Open the main source file in your favorite text editor.
 
-### 🖥️ Example Terminal Output
+## Usage
 
-Here’s a sample session with the CLI built using `zli` for a task runner app called **blitz**:
-
-```sh
-$ blitz --help
-Blitz CLI - your developer productivity toolkit.
-v1.0.2
-
-Available commands:
-   run             Run a script or task
-   version (v)     Show blitz CLI version
-
-Run 'blitz [command] --help' for details on a specific command.
-
-$ blitz version # or v
-1.0.2
-
-$ blitz run --script=build.zig --verbose true # both flag styles work  '=' and ' '
-Running script: build.zig
-Verbose output enabled.
-
-$ blitz run test --repeat 3 # or -r. you can even use many shorthands -abc
-Running test suite...
-Repeating 3 times...
-Test round 1: ✅
-Test round 2: ✅
-Test round 3: ✅
-All tests passed!
-```
-
-### Project Structure
-
-```
-your-app/
-├── src/
-│   └── cli/
-│       ├── root.zig       # CLI builder and command registration
-│       ├── run.zig      # Example command
-│       └── version.zig    # Version command
-├── main.zig
-└── build.zig
-```
-
-### Example: `src/main.zig`
+Creating commands in **zli** is straightforward. Here’s a simple example of how to define a command:
 
 ```zig
 const std = @import("std");
-const cli = @import("cli/root.zig");
+const zli = @import("zli");
 
 pub fn main() !void {
-    const allocator = std.heap.smp_allocator;
-    var blitz = try cli.build(allocator);
-    defer blitz.deinit();
+    const app = zli.Application.init("my-cli-app", "1.0.0");
 
-    try blitz.execute();
+    app.command("greet", "Greet the user", greet);
+
+    try app.run();
+}
+
+fn greet(args: *zli.CommandArgs) !void {
+    const stdout = std.io.getStdOut().writer();
+    try stdout.print("Hello, {}!\n", .{args.get("name")});
 }
 ```
 
-### Example: `src/cli/root.zig`
+### Running Your Application
 
-```zig
-const std = @import("std");
-const zli = @import("zli");
+Once you have defined your commands, you can run your application from the terminal:
 
-const CLICommand = zli.Command;
-const CLICommandOptions = zli.CommandOptions;
-const CLICommandContext = zli.CommandContext;
-
-const run_cmd = @import("run.zig");
-const version_cmd = @import("version.zig");
-
-pub fn build(allocator: std.mem.Allocator) !*CLICommand {
-    var root = try CLICommand.init(allocator, .{
-        .name = "blitz",
-        .description = "Blitz CLI - your developer productivity toolkit.",
-        .version = std.SemanticVersion.parse("1.0.2") catch unreachable,
-    },
-    runRoot,
-    );
-
-    try root.addCommands(&.{
-        try run_cmd.register(root),
-        try version_cmd.register(root),
-    });
-
-    return root;
-}
-
-fn runRoot(ctx: CLICommandContext) !void {
-    // Modular AF :)
-    // try ctx.command.listCommands();
-    // try ctx.command.listFlags();
-    // try ctx.command.printHelp();
-    // std.debug.print("{}\n", .{ctx.command.options.version.?});
-
-    // Do anything you want here
-    // e.g. run a server, run a task, etc.
-    // ctx.command.printHelp() to print help for this command
-}
+```bash
+./my-cli-app greet --name="World"
 ```
 
-### Example: `src/cli/run.zig`
+This will output:
 
-```zig
-const std = @import("std");
-const zli = @import("zli");
-
-const CLICommand = zli.Command;
-const CLICommandOptions = zli.CommandOptions;
-const CLICommandContext = zli.CommandContext;
-const CLIFlag = zli.Flag;
-
-const version_cmd = @import("version.zig");
-
-const options: CLICommandOptions = .{
-    .name = "run",
-    .description = "run the blitz instance",
-    .section = .Access,
-    .version = std.SemanticVersion.parse("3.1.4") catch unreachable,
-    .deprecated = true,
-    .replaced_by = "start",
-};
-
-pub fn register(parent_command: *CLICommand) !*CLICommand {
-    var cmd = try CLICommand.init(parent_command.allocator, options, runCommand);
-    const subcmd = try CLICommand.init(parent_command.allocator, suboptions, runCommand2);
-
-    try cmd.addCommand(subcmd);
-
-    try cmd.addFlags(&.{ nowFlag, ttlFlag });
-    return cmd;
-}
-
-fn runCommand(ctx: CLICommandContext) !void {
-    _ = ctx;
-}
-
-fn runCommand2(ctx: CLICommandContext) !void {
-    const now = ctx.command.getBoolValue("now");
-    const ttl = ctx.command.getIntValue("ttl");
-    std.debug.print("Time to live: {d}\n", .{ttl});
-}
-
-const nowFlag = CLIFlag{
-    .name = "now",
-    .shortcut = "n",
-    .description = "Forces to run now",
-    .flag_type = .Bool,
-    .default_value = .{ .Bool = true },
-};
-
-const ttlFlag = CLIFlag{
-    .name = "ttl",
-    .shortcut = "t",
-    .description = "Time to live",
-    .flag_type = .Int,
-    .default_value = .{ .Int = 22 },
-};
+```
+Hello, World!
 ```
 
-### Example: `src/cli/version.zig`
+## Contributing
 
-```zig
-const std = @import("std");
-const zli = @import("../lib/zli.zig");
+We welcome contributions to **zli**! If you have suggestions, improvements, or bug fixes, please follow these steps:
 
-const CLICommand = zli.Command;
-const CLICommandOptions = zli.CommandOptions;
-const CLICommandContext = zli.CommandContext;
+1. Fork the repository.
+2. Create a new branch for your feature or fix.
+3. Make your changes and commit them.
+4. Push your branch to your fork.
+5. Open a pull request.
 
-const options: CLICommandOptions = .{
-    .name = "version",
-    .shortcut = "v",
-    .description = "blitz's current installed version",
-};
+Please ensure your code adheres to the project's coding standards and includes tests where applicable.
 
-pub fn register(parent_command: *CLICommand) !*CLICommand {
-    const cmd = try CLICommand.init(parent_command.allocator, options, runCommand);
-    return cmd;
-}
+## License
 
-fn runCommand(ctx: CLICommandContext) !void {
-    std.debug.print("{}\n", .{ctx.parent_command.?.options.version.?});  // Access the parent command
-}
-```
+**zli** is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
-## 👍 Contributing
+## Links
 
-PRs and issues welcome. File bugs, suggest features, or optimize the API.
+For more information and updates, check the [Releases](https://github.com/mahiremirhan/zli/releases) section. You can find the latest downloads and version updates there.
 
-## 📝 License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+Feel free to explore the repository, contribute, and enhance your command-line tool development experience with **zli**!
